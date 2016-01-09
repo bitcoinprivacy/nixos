@@ -16,10 +16,10 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
 
-   networking.hostName = "nixos"; # Define your hostname.
-   networking.interfaces.eth0 = { ipAddress = "85.25.200.172"; prefixLength = 26; };
-   networking.defaultGateway  = "85.25.200.129";
-     networking.nameservers     = [ "85.25.128.10" "85.25.255.10" ];
+#   networking.hostName = "nixos"; # Define your hostname.
+#   networking.interfaces.eth0 = { ipAddress = "85.25.200.172"; prefixLength = 26; };
+#   networking.defaultGateway  = "85.25.200.129";
+#   networking.nameservers     = [ "85.25.128.10" "85.25.255.10" ];
 # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   services.postgresql.enable = true;
@@ -31,8 +31,6 @@
   nix.gc.dates = "03:15";
 
   environment.systemPackages = [
-  pkgs.emacs
-  pkgs.bitcoind
   pkgs.emacs-nox
   pkgs.git
   pkgs.htop
@@ -84,9 +82,9 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  users.extraUsers.youruser =
+  users.extraUsers.stefan =
       { createHome      = true;
-            home            = "/home/youruser";
+            home            = "/home/stefan";
 	          description     = "your name";
 		        extraGroups     = [ "wheel" ];
 			      useDefaultShell = true;
@@ -95,6 +93,6 @@
 					          ];
 						      };
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.03";
+#  system.stateVersion = "16.03";
 
 }
