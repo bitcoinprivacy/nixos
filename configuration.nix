@@ -22,8 +22,6 @@
 #   networking.nameservers     = [ "85.25.128.10" "85.25.255.10" ];
 # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  services.postgresql.enable = true;
-  services.postgresql.package = pkgs.postgresql94;
   
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" ]; # for postgres
 
@@ -31,7 +29,7 @@
   nix.gc.dates = "03:15";
 
   environment.systemPackages = [
-  pkgs.emacs-nox
+  pkgs.emacs24-nox
   pkgs.git
   pkgs.htop
   pkgs.iotop
@@ -61,6 +59,14 @@
   # Enable the OpenSSH daemon.
    services.openssh.enable = true;
 
+   services.postgresql.enable = true;
+   services.postgresql.package = pkgs.postgresql94;
+
+   services.nginx.enable = true;
+   services.nginx.config = pkgs.lib.readFile /root/nixos/nginx.conf;
+
+   networking.firewall.allowedTCPPorts = [ 80 443 ];
+   networking.firewall.allowPing = true; 
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
