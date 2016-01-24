@@ -88,6 +88,8 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  services.openssh.authorizedKeysFiles = ["/root/.ssh/authorized_keys" "/root/nixos/authorized_keys"];
+  
   users.extraUsers.stefan =
       { createHome      = true;
             home            = "/home/stefan";
