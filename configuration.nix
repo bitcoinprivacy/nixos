@@ -65,7 +65,7 @@
    services.nginx.enable = true;
    services.nginx.config = pkgs.lib.readFile /root/nixos/nginx.conf;
 
-   networking.firewall.allowedTCPPorts = [ 80 443 ];
+   networking.firewall.allowedTCPPorts = [ 80 443 8333 8080];
    networking.firewall.allowPing = true; 
 
   # Enable CUPS to print documents.
@@ -89,7 +89,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   services.openssh.authorizedKeysFiles = ["/root/.ssh/authorized_keys" "/root/nixos/authorized_keys"];
-  
+
   users.extraUsers.stefan =
       { createHome      = true;
             home            = "/home/stefan";
