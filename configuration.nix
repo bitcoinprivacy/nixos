@@ -16,6 +16,11 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
 
+  fileSystems."/root" =
+      { device = "/dev/sdb1";
+            fsType = "ext4";
+                };
+
 #   networking.hostName = "nixos"; # Define your hostname.
 #   networking.interfaces.eth0 = { ipAddress = "85.25.200.172"; prefixLength = 26; };
 #   networking.defaultGateway  = "85.25.200.129";
@@ -84,7 +89,7 @@
   # users.extraUsers.guest = {
   #   isNormalUser = true;
   #   uid = 1000;
-  # };
+  # };/
 
   security.sudo.wheelNeedsPassword = false;
 
