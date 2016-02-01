@@ -68,7 +68,7 @@
    services.postgresql.package = pkgs.postgresql94;
 
    services.nginx.enable = true;
-   services.nginx.config = pkgs.lib.readFile /root/nixos/nginx.conf;
+   services.nginx.config = pkgs.lib.readFile /nixos/nginx.conf;
 
    networking.firewall.allowedTCPPorts = [ 80 443 8333 8080];
    networking.firewall.allowPing = true; 
@@ -93,7 +93,7 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  services.openssh.authorizedKeysFiles = ["/root/.ssh/authorized_keys" "/root/nixos/authorized_keys"];
+  services.openssh.authorizedKeysFiles = ["/root/.ssh/authorized_keys" "/nixos/authorized_keys"];
 
   users.extraUsers.stefan =
       { createHome      = true;
