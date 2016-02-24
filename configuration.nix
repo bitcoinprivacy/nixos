@@ -41,6 +41,7 @@
   pkgs.nix
   pkgs.sbt
   pkgs.tmux
+  pkgs.activator
   ] ;
   
   # Select internationalisation properties.
@@ -70,11 +71,10 @@
    services.nginx.enable = true;
    services.nginx.config = pkgs.lib.readFile /nixos/nginx.conf;
 
-   networking.firewall.allowedTCPPorts = [ 80 443 8333 8080];
+   networking.firewall.allowedTCPPorts = [ 80 443 8333 8080 9000 5432];
    networking.firewall.allowPing = true; 
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  # virtualisation.docker.enable = true;
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -108,4 +108,7 @@
   # The NixOS release to be compatible with for stateful data such as databases.
 #  system.stateVersion = "16.03";
 
+   nix.buildCores = 0;
+
+# this makes building maximally parallel. disable if something goes wrong!
 }
