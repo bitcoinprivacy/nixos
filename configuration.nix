@@ -34,6 +34,7 @@
   nix.gc.dates = "03:15";
 
   environment.systemPackages = [
+  pkgs.gcc
   pkgs.emacs24-nox
   pkgs.git
   pkgs.htop
@@ -67,6 +68,16 @@
 
    services.postgresql.enable = true;
    services.postgresql.package = pkgs.postgresql94;
+   services.postgresql.extraConfig = ''
+                                   shared_buffers = 8GB
+                                   effective_cache_size = 24GB
+                                   work_mem = 128MB
+                                   maintenance_work_mem = 8GB
+                                   random_page_cost = 1.5
+                                   effective_io_concurrency = 5
+                                   checkpoint_segments=32
+                                   checkpoint_completion_target=0.9
+                                   '';
 
    services.nginx.enable = true;
    services.nginx.config = pkgs.lib.readFile /nixos/nginx.conf;
