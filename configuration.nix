@@ -82,7 +82,7 @@
    services.nginx.enable = true;
    services.nginx.config = pkgs.lib.readFile /nixos/nginx.conf;
 
-   networking.firewall.allowedTCPPorts = [ 80 443 8333 8080 9000 5432];
+   networking.firewall.allowedTCPPorts = [ 80 443 8333 8080 8081 9000 9001];
    networking.firewall.allowPing = true; 
 
   # virtualisation.docker.enable = true;
