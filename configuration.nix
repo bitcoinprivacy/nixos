@@ -34,15 +34,16 @@
   nix.gc.dates = "03:15";
 
   environment.systemPackages = [
-  pkgs.gcc
+# pkgs.gcc
   pkgs.emacs24-nox
   pkgs.git
   pkgs.htop
   pkgs.iotop
-  pkgs.nix
+# pkgs.nix this should be automatic, no?
   pkgs.sbt
   pkgs.tmux
   pkgs.activator
+  pkgs.certbot
   ] ;
   
   # Select internationalisation properties.
