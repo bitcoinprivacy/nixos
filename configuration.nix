@@ -16,18 +16,6 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
 
-  fileSystems."/root" =
-      { device = "/dev/sdb1";
-            fsType = "ext4";
-                };
-
-#   networking.hostName = "nixos"; # Define your hostname.
-#   networking.interfaces.eth0 = { ipAddress = "85.25.200.172"; prefixLength = 26; };
-#   networking.defaultGateway  = "85.25.200.129";
-#   networking.nameservers     = [ "85.25.128.10" "85.25.255.10" ];
-# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" ]; # for postgres
 
   nix.gc.automatic = true;
@@ -43,7 +31,10 @@
   pkgs.sbt
   pkgs.tmux
   pkgs.activator
-  pkgs.certbot
+#  pkgs.certbot # this is not in 16.03
+ # pkgs.altcoins.bitcoin
+   pkgs.jdk
+#   pkgs.goaccess   # 1.0 in not in 16.03
   ] ;
   
   # Select internationalisation properties.
@@ -83,19 +74,14 @@
    services.nginx.enable = true;
    services.nginx.config = pkgs.lib.readFile /nixos/nginx.conf;
 
-   networking.firewall.allowedTCPPorts = [ 80 443 8333 8080 8081 9000 9001];
+   networking.firewall.allowedTCPPorts = [22 80 443 8333 7890 8080 8081 9000 9001];
    networking.firewall.allowPing = true; 
 
-  # virtualisation.docker.enable = true;
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.kdm.enable = true;
-  # services.xserver.desktopManager.kde4.enable = true;
+   services.cron.enable = true;
+   services.cron.systemCronJobs = 
+   [ ''@weekly  root   certbot renew --standalone --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx"''
+#    ''@hourly  root   goaccess -p /root/.goaccessrc -f /var/spool/nginx/logs/access.log -o /data/www/report.html'' # we can do this in realtime now!
+                    ] ;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # users.extraUsers.guest = {
@@ -118,7 +104,7 @@
 					          ];
 						      };
   # The NixOS release to be compatible with for stateful data such as databases.
-#  system.stateVersion = "16.03";
+  system.stateVersion = "16.03";
 
    nix.buildCores = 0;
 
